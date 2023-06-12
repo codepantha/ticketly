@@ -6,3 +6,11 @@
 <%= button_to 'Delete Project', project_path(@project), method: :delete %>
 
 <p><%= @project.description %></p>
+
+<header>
+  <h2>Tickets</h2>
+
+  <ul class="actions">
+    <li><%= link_to 'New Ticket', new_project_ticket_path(@project) %></li>
+  </ul>
+</header>
