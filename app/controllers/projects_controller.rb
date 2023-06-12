@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
@@ -43,7 +45,7 @@ class ProjectsController < ApplicationController
   end
 
   private
-  
+
   def project_params
     params.require(:project).permit(:name, :description)
   end
