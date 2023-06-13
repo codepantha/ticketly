@@ -19,9 +19,11 @@
   <body>
     <div class="container-fluid">
       <% flash.each do |key, message| %>
-        <div><%= message %></div>
+        <div class="alert alert-<%= key %>">
+          <%= message %>
+        </div>
       <% end %>
-      
+
       <%= yield %>
     </div>
   </body>
