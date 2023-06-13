@@ -1,1 +1,26 @@
 @import "bootstrap";
+@import "font-awesome";
+
+.page-header {
+  @extend .pb-2, .mt-4, .mb-2, .border-bottom, .row;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @extend .col-sm-12, .col-md-6;
+  }
+
+  ul.actions {
+    @extend .col-sm-12, .col-md-6;
+    @extend .list-unstyled, .list-inline;
+
+    li {
+      @extend .list-inline-item;
+    }
+
+    text-align: right;
+  }
+}
