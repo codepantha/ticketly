@@ -43,6 +43,7 @@
             <p class="nav-item">
               Signed in as <%= current_user.email %>
             </p>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger ml-1' %>
           </div>
         <% end %>
       </div>
