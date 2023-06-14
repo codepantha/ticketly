@@ -1,0 +1,11 @@
+<header>
+  <h2>Sign up</h2>
+</header>
+
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), label_errors: true) do |f| %>
+  <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <%= f.password_field :password, autocomplete: "new-password" %>
+  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+
+  <%= f.primary "Sign up" %>
+<% end %>
