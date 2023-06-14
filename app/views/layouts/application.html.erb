@@ -28,10 +28,23 @@
           <li class="nav-item <%= "active" if current_page?("/") %>">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-          <li class="<%= "active" if current_page?("/users/sign_up") %>">
-            <%= link_to "Sign up", new_user_registration_path %>
-          </li>
+          <% unless user_signed_in? %>
+            <li class="<%= "active" if current_page?("/users/sign_up") %>">
+              <%= link_to "Sign up", new_user_registration_path %>
+            </li>
+            <li class="<%= "active" if current_page?("/users/sign_in") %>">
+              <%= link_to "Sign in", new_user_session_path %>
+            </li>
+          <% end %>
         </ul>
+
+        <% if user_signed_in? %>
+          <div class="navbar-nav ms-auto">
+            <p class="nav-item">
+              Signed in as <%= current_user.email %>
+            </p>
+          </div>
+        <% end %>
       </div>
     </nav>
 
