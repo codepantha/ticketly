@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     root 'application#index'
 
     resources :projects, except: %i[index show]
+    resources :users
   end
 
   devise_for :users
