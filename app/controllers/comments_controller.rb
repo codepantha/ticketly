@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
     else
       flash.now[:alert] = 'Comment has not been created.'
       @project = @ticket.project
+      @states = State.all
       render 'tickets/show'
     end
   end
@@ -22,7 +23,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:text)
+    params.require(:comment).permit(:text, :state_id)
   end
 
 end
