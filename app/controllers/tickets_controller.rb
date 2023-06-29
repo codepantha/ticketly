@@ -21,7 +21,10 @@ class TicketsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @comment = @ticket.comments.build(state: @ticket.state)
+    @states = State.all
+  end
 
   def edit; end
 

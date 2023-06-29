@@ -10,6 +10,12 @@ Rails.application.routes.draw do
         patch :archive
       end
     end
+
+    resources :states, only: %i[index new create] do
+      member do
+        patch :make_default
+      end
+    end
   end
 
   devise_for :users
@@ -18,5 +24,9 @@ Rails.application.routes.draw do
 
   resources :projects, only: %i[index show] do
     resources :tickets
+  end
+
+  scope path: 'tickets/:ticket_id/', as: :ticket do
+    resources :comments, only: [:create]
   end
 end
