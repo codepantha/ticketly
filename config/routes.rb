@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         patch :archive
       end
     end
+    
+    resources :states, only: %i[index new create]
   end
 
   devise_for :users
