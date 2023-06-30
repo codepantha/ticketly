@@ -88,6 +88,8 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    css_parser (1.14.0)
+      addressable
     date (3.3.3)
     devise (4.7.3)
       bcrypt (~> 3.0)
@@ -149,6 +151,14 @@ GEM
     orm_adapter (0.5.0)
     pg (1.5.3-x64-mingw32)
     popper_js (2.11.7)
+    premailer (1.21.0)
+      addressable
+      css_parser (>= 1.12.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.12.0)
+      actionmailer (>= 3)
+      net-smtp
+      premailer (~> 1.7, >= 1.7.9)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -282,6 +292,7 @@ DEPENDENCIES
   font-awesome-rails (= 4.7.0.6)
   jbuilder (~> 2.7)
   pg (~> 1.1)
+  premailer-rails (~> 1.11)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.2)
