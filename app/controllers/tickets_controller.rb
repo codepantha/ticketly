@@ -12,7 +12,10 @@ class TicketsController < ApplicationController
     @ticket = @project.tickets.build(ticket_params)
     @ticket.author = current_user
 
+    # ticket creator is automatically subscribed as a watcher
     if @ticket.save
+      @ticket.watchers << current_user unless @ticket.watchers.exists?(current_user.id)
+
       flash[:notice] = 'Ticket has been created.'
       redirect_to [@project, @ticket]
     else
