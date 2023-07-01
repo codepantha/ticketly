@@ -23,7 +23,11 @@ Rails.application.routes.draw do
   root 'projects#index'
 
   resources :projects, only: %i[index show] do
-    resources :tickets
+    resources :tickets do
+      member do
+        patch :watch
+      end
+    end
   end
 
   scope path: 'tickets/:ticket_id/', as: :ticket do
