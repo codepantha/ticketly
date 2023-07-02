@@ -12,6 +12,10 @@ class TicketsController < ApplicationController
     @ticket = @project.tickets.build(ticket_params)
     @ticket.author = current_user
 
+    @ticket.tags = params[:tag_names].split(',').map do |tag|
+      Tag.find_or_initialize_by(name: tag.strip)
+    end
+
     # ticket creator is automatically subscribed as a watcher
     if @ticket.save
       @ticket.watchers << current_user unless @ticket.watchers.exists?(current_user.id)
