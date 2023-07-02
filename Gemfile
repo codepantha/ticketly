@@ -51,6 +51,7 @@ group :test do
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'email_spec', '~> 2.2.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -63,3 +64,5 @@ gem "font-awesome-rails", "= 4.7.0.6"
 gem "bootstrap_form", "= 4.5.0"
 
 gem "devise", "~> 4.7.3"
+
+gem "premailer-rails", "~> 1.11"
