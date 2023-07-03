@@ -2,7 +2,10 @@
   <%= form.text_field :name %>
   <%= form.text_area :description %>
   <%= form.file_field :attachment, label: 'File' %>
-  <%= label_tag :tag_names, "Tags" %>
-  <%= text_field_tag :tag_names, "", class: "form-control" %>
+  <div class="form-group tags">
+    <div><%= label_tag :tag_names, "Tags" %></div>
+    <%= render @ticket.tags %>
+    <%= text_field_tag :tag_names, "", class: "form-control" %>
+  </div>
   <%= form.submit %>
 <% end %>

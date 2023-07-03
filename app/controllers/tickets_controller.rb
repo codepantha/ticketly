@@ -37,6 +37,9 @@ class TicketsController < ApplicationController
 
   def update
     if @ticket.update(ticket_params)
+      @ticket.tags << params[:tag_names].split(',').map do |tag|
+        Tag.find_or_initialize_by(name: tag.strip)
+      end
       flash[:notice] = 'Ticket has been updated.'
       redirect_to [@project, @ticket]
     else
