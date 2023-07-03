@@ -2,3 +2,5 @@ Documentation:
   Enabled: false
 convention:Metrics/AbcSize:
   Enabled: false
+convention:Metrics/MethodLength:
+  Enabled: false
