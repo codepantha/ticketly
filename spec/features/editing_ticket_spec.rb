@@ -52,8 +52,8 @@ RSpec.feature 'Users can update tickets' do
       within('.ticket .attributes .tags') do
         expect(page).to have_content('Visual Testing')
         expect(page).to have_content('Browser')
-        expect(page).to have_content('regression')
-        expect(page).to have_content('bug')
+        expect(page).to have_content('Regression')
+        expect(page).to have_content('Bug')
       end
     end
   end

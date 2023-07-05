@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
   resources :projects, only: %i[index show] do
     resources :tickets do
+      collection do
+        get :search
+      end
       member do
         patch :watch
       end

@@ -4,11 +4,15 @@ RSpec.feature 'Users can remove tags' do
   let(:user) { FactoryBot.create(:user) }
   let(:project) { FactoryBot.create(:project) }
   let!(:ticket) do
-    FactoryBot.create(:ticket, project: project, author: user)
+    FactoryBot.create(
+      :ticket,
+      project: project,
+      author: user,
+      tags: [FactoryBot.create(:tag, name: 'This Tag Must Die')]
+    )
   end
 
   before do
-    ticket.tags << FactoryBot.create(:tag, name: 'This Tag Must Die')
     login_as(user)
     visit project_ticket_path(project, ticket)
   end

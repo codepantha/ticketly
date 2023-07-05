@@ -63,6 +63,21 @@ class TicketsController < ApplicationController
     redirect_to project_ticket_path(@ticket.project, @ticket)
   end
 
+  def search
+    if params[:search].present?
+      search_term = params[:search].titleize
+      tag = Tag.search_tag(search_term)
+      @tickets = if tag.nil?
+                   @project.tickets
+                 else
+                   tag.tickets.belonging_to_project(@project.id)
+                 end
+    else
+      @tickets = @project.tickets
+    end
+    render 'projects/show'
+  end
+
   private
 
   def set_project
@@ -75,7 +90,7 @@ class TicketsController < ApplicationController
 
   def processed_tags
     params[:tag_names].split(',').map do |tag|
-      Tag.find_or_initialize_by(name: tag.strip)
+      Tag.find_or_initialize_by(name: tag.strip.titleize)
     end
   end
 
