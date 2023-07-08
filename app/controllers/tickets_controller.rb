@@ -64,16 +64,33 @@ class TicketsController < ApplicationController
   end
 
   def search
+    @tickets = @project.tickets
+
     if params[:search].present?
-      search_term = params[:search].titleize
-      tag = Tag.search_tag(search_term)
-      @tickets = if tag.nil?
-                   @project.tickets
-                 else
-                   tag.tickets.belonging_to_project(@project.id)
-                 end
+      search_query = params[:search]
+
+      if search_query.include?('tag:')
+        search_term = search_query.split('tag: ')[1].split(' ')[0].strip.titleize
+        tag = Tag.search_tag(search_term)
+        if tag.nil?
+          @tickets
+        else
+          @tickets = tag.tickets.belonging_to_project(@project.id)
+        end
+      end
+
+      if search_query.include?('state:')
+        search_term = search_query.split('state: ')[1].split(' ')[0].strip.titleize
+        state = State.where('name LIKE ?', "%#{search_term}%").first
+        if state.nil?
+          @tickets
+        else
+          @tickets = @tickets.filter_map { |ticket| ticket if ticket.state_id == state.id }
+        end
+      end
+
     else
-      @tickets = @project.tickets
+      @tickets
     end
     render 'projects/show'
   end
@@ -92,6 +109,9 @@ class TicketsController < ApplicationController
     params[:tag_names].split(',').map do |tag|
       Tag.find_or_initialize_by(name: tag.strip.titleize)
     end
+  end
+
+  def process_search_terms
   end
 
   def ticket_params
