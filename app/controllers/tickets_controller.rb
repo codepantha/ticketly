@@ -69,8 +69,8 @@ class TicketsController < ApplicationController
     if params[:search].present?
       search_query = params[:search]
 
-      if search_query.include?('tag:')
-        search_term = search_query.split('tag: ')[1].split(' ')[0].strip.titleize
+      if search_query.include?('tag')
+        search_term = process_search_term('tag: ')
         tag = Tag.search_tag(search_term)
         if tag.nil?
           @tickets
@@ -79,8 +79,8 @@ class TicketsController < ApplicationController
         end
       end
 
-      if search_query.include?('state:')
-        search_term = search_query.split('state: ')[1].split(' ')[0].strip.titleize
+      if search_query.include?('state')
+        search_term = process_search_term('state: ')
         state = State.where('name LIKE ?', "%#{search_term}%").first
         if state.nil?
           @tickets
@@ -111,7 +111,10 @@ class TicketsController < ApplicationController
     end
   end
 
-  def process_search_terms
+  def process_search_term(search_term)
+    params[:search].split(search_term)[1].split(' ')[0].strip.titleize
+  rescue NoMethodError
+    puts "Invalid search"
   end
 
   def ticket_params
