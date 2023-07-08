@@ -16,7 +16,6 @@ class Ticket < ApplicationRecord
                           class_name: 'User'
 
   has_and_belongs_to_many :tags
-  belongs_to :state
 
   scope :belonging_to_project, ->(project_id) { where('project_id = ?', project_id)}
 
