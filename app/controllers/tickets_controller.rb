@@ -69,26 +69,9 @@ class TicketsController < ApplicationController
     if params[:search].present?
       search_query = params[:search]
 
-      if search_query.include?('tag')
-        search_term = process_search_term('tag: ')
-        tag = Tag.search_tag(search_term)
-        if tag.nil?
-          @tickets
-        else
-          @tickets = tag.tickets.belonging_to_project(@project.id)
-        end
-      end
+      fetch_tickets_for_a_tag if search_query.include?('tag')
 
-      if search_query.include?('state')
-        search_term = process_search_term('state: ')
-        state = State.where('name LIKE ?', "%#{search_term}%").first
-        if state.nil?
-          @tickets
-        else
-          @tickets = @tickets.filter_map { |ticket| ticket if ticket.state_id == state.id }
-        end
-      end
-
+      fetch_tickets_for_a_state if search_query.include?('state')
     else
       @tickets
     end
@@ -114,7 +97,27 @@ class TicketsController < ApplicationController
   def process_search_term(search_term)
     params[:search].split(search_term)[1].split(' ')[0].strip.titleize
   rescue NoMethodError
-    puts "Invalid search"
+    puts 'Invalid search'
+  end
+
+  def fetch_tickets_for_a_tag
+    search_term = process_search_term('tag: ')
+    tag = Tag.search_tag(search_term)
+    if tag.nil?
+      @tickets
+    else
+      @tickets = tag.tickets.belonging_to_project(@project.id)
+    end
+  end
+
+  def fetch_tickets_for_a_state
+    search_term = process_search_term('state: ')
+    state = State.where('name LIKE ?', "%#{search_term}%").first
+    if state.nil?
+      @tickets
+    else
+      @tickets = @tickets.filter_map { |ticket| ticket if ticket.state_id == state.id }
+    end
   end
 
   def ticket_params
