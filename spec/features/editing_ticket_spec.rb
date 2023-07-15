@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.feature 'Users can update tickets' do
   let(:project) { FactoryBot.create(:project) }
   let(:ticket) { FactoryBot.create(:ticket, project: project) }
+  let(:bob) { FactoryBot.create(:user, email: 'bob@example.com') }
 
   before do
+    login_as(bob)
     visit project_ticket_path(project, ticket)
   end
 

@@ -3,6 +3,7 @@
 class TicketsController < ApplicationController
   before_action :set_project
   before_action :set_ticket, only: %i[show edit update destroy watch]
+  before_action :authenticate_user!
 
   def new
     @ticket = @project.tickets.build
