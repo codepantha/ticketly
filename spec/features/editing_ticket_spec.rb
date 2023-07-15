@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.feature 'Users can update tickets' do
   let(:project) { FactoryBot.create(:project) }
-  let(:ticket) { FactoryBot.create(:ticket, project: project) }
   let(:bob) { FactoryBot.create(:user, email: 'bob@example.com') }
+  let(:alice) { FactoryBot.create(:user, email: 'alice@example.com') }
+  let(:admin) { FactoryBot.create(:user, :admin) }
+  let(:ticket) { FactoryBot.create(:ticket, project: project, author: bob) }
 
   before do
     login_as(bob)
@@ -57,6 +59,27 @@ RSpec.feature 'Users can update tickets' do
         expect(page).to have_content('Regression')
         expect(page).to have_content('Bug')
       end
+    end
+  end
+
+  context 'if they own it or are admins' do
+    it 'shows error message if they aren\'t the authors or admin' do
+      login_as(alice)
+      click_link 'Edit Ticket'
+      fill_in 'Name', with: 'Make it really shiny!'
+      click_button 'Update Ticket'
+
+      expect(page).to have_content 'Only ticket authors or admins can edit tickets'
+    end
+
+    it 'is successful if they are admins' do
+      login_as(admin)
+
+      click_link 'Edit Ticket'
+      fill_in 'Name', with: 'Make it really shiny!'
+      click_button 'Update Ticket'
+
+      expect(page).to have_content 'Ticket has been updated.'
     end
   end
 end

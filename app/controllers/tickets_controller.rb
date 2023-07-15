@@ -35,6 +35,12 @@ class TicketsController < ApplicationController
   def edit; end
 
   def update
+    unless @ticket.author == current_user || @current_user.admin?
+      flash[:alert] = 'Only ticket authors or admins can edit tickets'
+      redirect_to [@project, @ticket]
+      return
+    end
+
     if @ticket.update(ticket_params)
       @ticket.tags << processed_tags
       flash[:notice] = 'Ticket has been updated.'
@@ -44,6 +50,7 @@ class TicketsController < ApplicationController
       render 'edit'
     end
   end
+  
 
   def destroy
     return unless @ticket.delete
