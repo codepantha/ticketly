@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
   resources :projects, only: %i[index show] do
     resources :tickets do
+      collection do
+        get :search
+      end
       member do
         patch :watch
       end
@@ -32,5 +35,6 @@ Rails.application.routes.draw do
 
   scope path: 'tickets/:ticket_id/', as: :ticket do
     resources :comments, only: [:create]
+    delete 'tags/:id/remove', to: 'tags#remove', as: :remove_tag
   end
 end

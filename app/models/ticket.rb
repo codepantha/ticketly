@@ -15,6 +15,10 @@ class Ticket < ApplicationRecord
                           join_table: 'ticket_watchers',
                           class_name: 'User'
 
+  has_and_belongs_to_many :tags
+
+  scope :belonging_to_project, ->(project_id) { where('project_id = ?', project_id)}
+
   private
 
   def assign_default_state

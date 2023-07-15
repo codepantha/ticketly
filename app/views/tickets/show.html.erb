@@ -29,6 +29,13 @@
       </tr>
     <% end %>
 
+    <% if @ticket.tags.any? %>
+      <tr>
+        <th>Tags:</th>
+        <td class="tags"><%= render @ticket.tags, ticket: @ticket %></td>
+      </tr>
+    <% end %>
+
     <dl>
       <dt>Watchers:</dt>
       <dd class="">
@@ -70,7 +77,7 @@
       <% comments.each do |comment| %>
         <%= render comment %>
         <% if comment.state != state %>
-          <%= render 'state_change', previous_state: state, new_state: comment.state %>
+          <%= render 'tickets/state_change', previous_state: state, new_state: comment.state %>
           <% state = comment.state %>
         <% end %>
       <% end %>
