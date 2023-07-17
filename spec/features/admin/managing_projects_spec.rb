@@ -18,16 +18,15 @@ RSpec.feature 'Admins can manage projects' do
       project: vscode,
       state: FactoryBot.create(:state, name: 'Closed')
     )
-    
+
     login_as(FactoryBot.create(:user, :admin))
     visit admin_root_path
-  end
-
-  scenario 'and view them with their details' do
     within(find('ul>li', text: 'Projects')) do
       click_link 'Projects'
     end
+  end
 
+  scenario 'and view them with their details' do
     within 'table.projects' do
       expect(page).to have_link 'VS Code'
       expect(page).to have_content '0 new'
@@ -36,5 +35,15 @@ RSpec.feature 'Admins can manage projects' do
     end
 
     expect(page).to have_current_path(admin_projects_path)
+  end
+
+  scenario 'and delete any project' do
+    within(find('tr', text: 'Sublime')) do
+      click_link 'X'
+    end
+
+    expect(page).to have_content 'Project has been deleted.'
+    expect(page).to_not have_link 'Sublime'
+    expect(page).to have_link 'VS Code'
   end
 end

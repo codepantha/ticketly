@@ -38,6 +38,9 @@ class Admin::ProjectsController < Admin::ApplicationController
 
     flash[:notice] = 'Project has been deleted.'
     redirect_to projects_path
+  rescue ActiveRecord::InvalidForeignKey
+    flash[:alert] = 'Project has tickets and cannot be deleted.'
+    redirect_to admin_projects_path
   end
 
   private
