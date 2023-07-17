@@ -1,5 +1,9 @@
 class Admin::ProjectsController < Admin::ApplicationController
-  before_action :set_project, except: %i[new create]
+  before_action :set_project, except: %i[index new create]
+
+  def index
+    @projects = Project.all
+  end
 
   def new
     @project = Project.new
@@ -34,6 +38,9 @@ class Admin::ProjectsController < Admin::ApplicationController
 
     flash[:notice] = 'Project has been deleted.'
     redirect_to projects_path
+  rescue ActiveRecord::InvalidForeignKey
+    flash[:alert] = 'Project has tickets and cannot be deleted.'
+    redirect_to admin_projects_path
   end
 
   private
