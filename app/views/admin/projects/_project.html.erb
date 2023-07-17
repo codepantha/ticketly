@@ -1,0 +1,10 @@
+<%= link_to project_path(project) do %>
+  <tr>
+    <td><%= project.id %>
+      <td><%= link_to project.name, [project] %>
+        <td><%= project.tickets.count %>
+          <td><%= "#{project.tickets.newly_created} new" %></td>
+          <td><%= "#{project.tickets.closed} closed" %></td>
+          <td><%= "#{project.tickets.active} active" %></td>
+        </tr>
+      <% end %>

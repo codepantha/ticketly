@@ -1,5 +1,9 @@
 class Admin::ProjectsController < Admin::ApplicationController
-  before_action :set_project, except: %i[new create]
+  before_action :set_project, except: %i[index new create]
+
+  def index
+    @projects = Project.all
+  end
 
   def new
     @project = Project.new
