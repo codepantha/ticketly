@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'application#index'
 
-    resources :projects, except: %i[show]
+    resources :projects
     resources :users do
       member do
         patch :archive
