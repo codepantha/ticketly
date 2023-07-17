@@ -6,6 +6,17 @@ class Admin::ProjectsController < Admin::ApplicationController
   end
 
   def show
+    @state = params[:state]&.strip&.titleize
+
+    @tickets = @project.tickets
+
+    return @tickets unless @state
+
+    @tickets = if @state == 'Active'
+                 @project.tickets.where.not(state: State.find_by(name: 'Closed'))
+               else
+                 @project.tickets.where(state: State.find_by(name: @state))
+               end
   end
 
   def new

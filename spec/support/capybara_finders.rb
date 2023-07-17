@@ -6,6 +6,10 @@ module CapybaraFinders
   def tag(content)
     find('div.tag', text: content)
   end
+
+  def row_item(content)
+    find('tr', text: content)
+  end
 end
 
 RSpec.configure do |c|
