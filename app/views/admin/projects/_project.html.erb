@@ -6,6 +6,9 @@
           <td><%= "#{project.tickets.newly_created} new" %></td>
           <td><%= "#{project.tickets.closed} closed" %></td>
           <td><%= "#{project.tickets.active} active" %></td>
+          <td><%= link_to '',
+          edit_admin_project_path(project),
+          class: "edit" %></td>
           <td><%= link_to 'X',
           admin_project_path(project),
           method: :delete,
