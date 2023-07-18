@@ -2,10 +2,10 @@
   <tr>
     <td><%= project.id %>
       <td><%= link_to project.name, [project] %>
-        <td><%= project.tickets.count %>
-          <td><%= "#{project.tickets.newly_created} new" %></td>
-          <td><%= "#{project.tickets.closed} closed" %></td>
-          <td><%= "#{project.tickets.active} active" %></td>
+        <td><%= link_to project.tickets.count, admin_project_path(project) %>
+          <td><%= link_to "#{project.tickets.newly_created.count} new", admin_project_path(project, state: 'New') %></td>
+          <td><%= link_to "#{project.tickets.closed.count} closed", admin_project_path(project, state: 'Closed') %></td>
+          <td><%= link_to "#{project.tickets.active} active", admin_project_path(project, state: 'Active') %></td>
           <td><%= link_to '',
           edit_admin_project_path(project),
           class: "edit" %></td>

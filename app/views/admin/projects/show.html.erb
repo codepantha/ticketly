@@ -1,0 +1,27 @@
+<header>
+  <h1>Project: <%= @project.name %> </h1>
+</header>
+
+<header>
+  <h3><%= @state %> Tickets</h3>
+</header>
+
+<% if @tickets.empty? %>
+  No tickets found!
+<% else %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover tickets">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Comments</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @tickets %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

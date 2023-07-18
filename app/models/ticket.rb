@@ -18,10 +18,10 @@ class Ticket < ApplicationRecord
   has_and_belongs_to_many :tags
 
   scope :belonging_to_project, ->(project_id) { where('project_id = ?', project_id)}
-  scope :closed, -> { where('state_id = ?', State.where('name = ?', 'Closed').first&.id).distinct.count }
-  scope :newly_created, -> { where('state_id = ?', State.where('name = ?', 'New').first&.id).distinct.count }
+  scope :closed, -> { where('state_id = ?', State.where('name = ?', 'Closed').first&.id) }
+  scope :newly_created, -> { where('state_id = ?', State.where('name = ?', 'New').first&.id) }
 
-  scope :active, -> { count - closed }
+  scope :active, -> { count - closed.count }
 
   private
 

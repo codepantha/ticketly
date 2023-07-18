@@ -1,0 +1,6 @@
+<tr>
+  <td><%= ticket.id %></td>
+  <td><%= link_to ticket.name, project_ticket_path(@project, ticket) %></td>
+  <td><%= ticket.comments.count %></td>
+  <td><%= render 'states/state', state: ticket.state %></td>
+</tr>
