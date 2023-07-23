@@ -31,7 +31,7 @@
 # 📖 Ticketly <a name="about-project"></a>
 
 
-**[Blog]** A fully functional web app that allows companies to track the progress of their projects using tickets. Users can create tickets, add comments, and update the status of the tickets.
+**[Ticketly]** A fully functional web app that allows companies to track the progress of their projects using tickets. Users can create tickets, add comments, and update the status of the tickets.
 
 ## 🛠 Built With <a name="built-with"></a>
 
