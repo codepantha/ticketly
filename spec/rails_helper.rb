@@ -68,3 +68,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers, type: :request
   config.after(type: :feature) { Warden.test_reset! }
 end
+
+if ENV['CI']
+  Capybara.javascript_driver = :selenium_headless
+end
