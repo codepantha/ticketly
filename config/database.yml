@@ -22,4 +22,4 @@ test:
 
 production:
   <<: *default
-  database: ticketly_prod_db
+  database: ticketly_prod_887
