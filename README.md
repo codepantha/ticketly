@@ -71,7 +71,10 @@
 
 <!-- LIVE DEMO -->
 ### LIVE DEMO
-Live demo coming soon...
+See the live demo [here](https://ticketly.onrender.com)
+#### Demo Login Details
+Email: admin@ticketly.com  
+Password: password
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -105,6 +108,11 @@ Install this project with:
 ```
 
 ### Usage
+
+To setup the project, run the following command
+```
+rails db:reset db:migrate db:seed
+```
 
 To run the project, execute the following command:
 
@@ -159,7 +167,7 @@ If you like this project kindly give it a star.
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank github and Microverse. 
+...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
