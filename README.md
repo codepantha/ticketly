@@ -65,7 +65,7 @@
 - Add comments on tickets
 - Ticket creators and commenters get subscribed as **watchers**
 - Watchers get email updates about ticket activities
-- Users can update ticket state
+- Users can update the ticket state
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
